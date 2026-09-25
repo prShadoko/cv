@@ -97,4 +97,4 @@ export const experiences: Experience[] = [
     end: '2025',
     // duration: '7 ans 3 mois',
   },
-];
+].reverse();

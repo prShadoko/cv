@@ -1,30 +1,37 @@
 <script lang="ts">
-  import Experience from '../Experience.svelte';
+  import Timeline from '../Timeline.svelte';
 
   const { data } = $props();
 </script>
 
 <div id="timeline">
-  <div class="branch" id="main"></div>
-  <div class="branch" id="formation"></div>
-  <div class="branch" id="job"></div>
-  <div id="xp">
-    {#each data.experiences as experience, i}
-    <Experience {...experience}></Experience>
-    {/each}
+  <div id="branches">
+    <div class="branch" id="main"></div>
+    <div class="branch" id="formation"></div>
+    <div class="branch" id="job"></div>
   </div>
+  <Timeline experiences={data.experiences}></Timeline>
 </div>
 
 <style>
   #timeline {
+    position: relative;
+  }
+
+  #branches {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 4px;
     display: flex;
     flex-direction: row;
     gap: var(--spacing);
     width: fit-content;
-    height: max-content;
+    height: 100%;
 
     .branch {
       width: 8px;
+      height: 100%;
 
       &#main {
         background-color: var(--color-main);
@@ -38,13 +45,5 @@
         background-color: var(--color-job);
       }
     }
-  }
-
-  #xp {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 8px;
-    width: fit-content;
-    height: max-content;
   }
 </style>

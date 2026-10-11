@@ -194,12 +194,14 @@ interface Contact {
   phone: string;
   email: string;
   address: string;
+  addressMap: string;
 }
 
 export const contact: Contact = {
   phone: '06 00 00 00 00',
   email: 'thomas.richard.pro@gmail.com',
   address: 'Vaise, Lyon 9<sup>e</sup>',
+  addressMap: 'https://maps.app.goo.gl/7n4wcj5NeooDkhR18',
 };
 
 export const readme: string[] = [

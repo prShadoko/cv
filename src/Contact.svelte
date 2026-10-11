@@ -1,33 +1,26 @@
 <script>
   const { contact } = $props();
 
-  import { Mail, MapPin, Phone } from '@lucide/svelte';
+  import { Mail, MapPin, MoveRight, Phone } from '@lucide/svelte';
 </script>
 
 <div id="contact">
   <div class="head">Contact</div>
   <div class="body">
     <div>
-      <Phone class="icon" /><span>{contact.phone}</span>
+      <a href="tel:{contact.phone}"><Phone class="icon" />{contact.phone}</a>
     </div>
     <div>
-      <Mail class="icon" /><span>{contact.email}</span>
+      <a href="mailto:{contact.email}"><Mail class="icon" />{contact.email}</a>
     </div>
     <div>
-      <MapPin class="icon" /><span>{@html contact.address}</span>
+      <a href={contact.addressMap} target="_blank"><MapPin class="icon" />{@html contact.address}</a>
     </div>
   </div>
 </div>
 
 
 <style>
-  /*
-  #1a87a3
-  #127189
-  
-  #004757
-  #b9cad0
-  */
   .head {
     background-color: #667f8c;
     border-radius: 4px 4px 0 0;
@@ -53,6 +46,11 @@
       display: inline-block;
       vertical-align: -0.125em;
       line-height: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
   }
 </style>

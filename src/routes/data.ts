@@ -102,7 +102,7 @@ export const experiences: Experience[] = [
 
 interface Ability {
   ability: string;
-  category: 'langages' | 'frameworks' | 'frontend' | 'backend' | 'bases de données' | 'déploiement';
+  category: 'langages' | 'frameworks' | 'frontend' | 'backend' | 'BDD' | 'déploiement';
   level: number;
 }
 
@@ -149,12 +149,12 @@ export const abilities: Ability[] = [
   },
   {
     ability: 'MongoDB',
-    category: 'bases de données' as const,
+    category: 'BDD' as const,
     level: 5,
   },
   {
     ability: 'PostgreSQL',
-    category: 'bases de données' as const,
+    category: 'BDD' as const,
     level: 4,
   },
   {

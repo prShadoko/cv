@@ -34,7 +34,7 @@ export const experiences: Experience[] = [
     branch: 'job' as const,
     title: 'Developpeur web',
     location: 'SYTRAL',
-    missions: ['Refonte de l\'intranet ; Creation de modules Joomla!', 'Assistance utilisateurs'],
+    missions: [`Refonte de l'intranet`, `Creation de modules Joomla!`, 'Assistance utilisateurs'],
     stack: ['PHP', 'Joomla!'],
     start: '2010',
     duration: '5 mois',
@@ -73,7 +73,7 @@ export const experiences: Experience[] = [
   },
   {
     branch: 'formation' as const,
-    title: 'Formation d\'ingénieur, filière informatique',
+    title: `Formation d'ingénieur, filière informatique`,
     location: 'Polytech Lyon, Villeurbanne',
     start: '2012',
     end: '2016',

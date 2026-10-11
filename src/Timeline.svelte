@@ -2,31 +2,39 @@
   const { experiences } = $props();
 </script>
 
-<div id="xp">
-  {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
-  <div class={['peg', branch]}>
-    <div></div>
+<div id="timeline">
+  <div id="branches">
+    <div class="branch" id="main"></div>
+    <div class="branch" id="formation"></div>
+    <div class="branch" id="job"></div>
   </div>
-  <div class={['timestamp', branch]}>
-    <div class="period">{start}{end ? ` - ${end}` : ''}</div>
-    {#if duration}
-    <div class="duration">{duration}</div>
-    {/if}
+  <div id="xp">
+    {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
+    <div class={['peg', branch]}>
+      <div></div>
+    </div>
+    <div class={['timestamp', branch]}>
+      <div class="period">{start}{end ? ` - ${end}` : ''}</div>
+      {#if duration}
+      <div class="duration">{duration}</div>
+      {/if}
+    </div>
+    <div class={['content', branch]}>
+      <div class="title">{@html title}</div>
+      {#if location}
+      <div class="location">@&nbsp;{@html location}</div>
+      {/if}
+      {#if missions}
+      <div class="missions">{@html missions.join(' ; ')}</div>
+      {/if}
+      {#if stack}
+      <div class="stack">{@html stack.join(' ; ')}</div>
+      {/if}
+    </div>
+    {/each}
   </div>
-  <div class={['content', branch]}>
-    <div class="title">{@html title}</div>
-    {#if location}
-    <div class="location">@&nbsp;{@html location}</div>
-    {/if}
-    {#if missions}
-    <div class="missions">{@html missions.join(' ; ')}</div>
-    {/if}
-    {#if stack}
-    <div class="stack">{@html stack.join(' ; ')}</div>
-    {/if}
-  </div>
-  {/each}
 </div>
+
 
 <style>
   /* prevent sup tags from increasing line height (https://css-tricks.com/snippets/css/prevent-superscripts-and-subscripts-from-affecting-line-height/) */
@@ -35,6 +43,39 @@
     position: relative;
     top: -0.4em;
     line-height: 0;
+  }
+
+  #timeline {
+    position: relative;
+  }
+
+  #branches {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 4px;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing);
+    width: fit-content;
+    height: 100%;
+
+    .branch {
+      width: 8px;
+      height: 100%;
+
+      &#main {
+        background-color: var(--color-main);
+      }
+
+      &#formation {
+        background-color: var(--color-formation);
+      }
+
+      &#job {
+        background-color: var(--color-job);
+      }
+    }
   }
 
   #xp {
@@ -59,7 +100,7 @@
 
   .timestamp,
   .content {  
-    min-height: 4em;
+    min-height: 2rem;
     line-height: 130%;
   }
 
@@ -150,7 +191,7 @@
   }
 
   .title {
-    font-size: 1.05em;
+    font-size: 1.05rem;
     font-weight: 600;
     flex-shrink: 0;
   }

@@ -13,20 +13,20 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     branch: 'main' as const,
-    title: 'Init',
+    title: 'Initialisation du processus',
     start: '1990',
   },
   {
     branch: 'formation' as const,
     title: 'Classes preparatoires - PTSI / PT',
-    location: 'ECAM Lyon, Lyon 5<sup>e</sup>',
+    location: 'ECAM Lyon',
     start: '2007',
     end: '2009',
   },
   {
     branch: 'formation' as const,
     title: 'DUT informatique année spéciale',
-    location: 'IUT Lyon 1, Villeurbanne',
+    location: 'IUT Lyon 1',
     start: '2009',
     end: '2010',
   },
@@ -42,7 +42,7 @@ export const experiences: Experience[] = [
   {
     branch: 'formation' as const,
     title: 'Licence informatique, 3<sup>e</sup> année',
-    location: 'Université Claude Bernard Lyon 1, Villeurbanne',
+    location: 'Université Claude Bernard Lyon 1',
     start: '2011',
   },
   {
@@ -74,7 +74,7 @@ export const experiences: Experience[] = [
   {
     branch: 'formation' as const,
     title: `Formation d'ingénieur, filière informatique`,
-    location: 'Polytech Lyon, Villeurbanne',
+    location: 'Polytech Lyon',
     start: '2012',
     end: '2016',
   },
@@ -82,8 +82,8 @@ export const experiences: Experience[] = [
     branch: 'job' as const,
     title: 'Développeur full-stack et chef de projet',
     location: 'Sifoee Innovation',
-    missions: ['Développement web', 'Mise en place de workflow de développement', 'Administration serveur', 'Accompagnement des stagiaires'],
-    stack: ['PHP', 'Symfony', 'HTML', 'CSS', 'MariaDB'],
+    missions: ['Développement web', 'Administration serveur', 'Mise en place de workflows de développement', 'Accompagnement des stagiaires'],
+    stack: ['PHP', 'Symfony', 'HTML', 'CSS', 'MariaDB', 'C++', 'Qt'],
     start: '2016',
     end: '2017',
   },
@@ -91,7 +91,7 @@ export const experiences: Experience[] = [
     branch: 'job' as const,
     title: 'Développeur backend',
     location: 'digiSchool Group',
-    missions: ['Création et maintien des microservices paiements et contenus pour les sites et apps'],
+    missions: ['Création et maintien des microservices de paiements, contenus pédagogiques et données utilisateurs pour les sites et apps mobiles', `Maintien de l'API GraphQL et mise en place de bonnes pratiques`, `Évolution du back-office pour le microservice de contenus péagogique`],
     stack: ['TypeScript', 'NestJS', 'NextJS', 'React', 'GraphQL', 'MongoDB', 'PostgreSQL', 'Docker'],
     start: '2018',
     end: '2025',
@@ -185,9 +185,9 @@ export const languages: Language[] = [
 export const hobbies: string[] = [
   'Escalade',
   'Course à pied',
+  'Jeux de société',
   'Dessin',
   'Streaming',
-  'Jeux de société',
 ];
 
 interface Contact {
@@ -205,6 +205,6 @@ export const contact: Contact = {
 };
 
 export const readme: string[] = [
-  `J'ai 36 ans, dont 20 passés à coder dans divers langages. Je suis curieux, méthodique et exigeant quant à la qualité du code.`,
-  `J'ai le permis mais me déplace essentiellement à vélo, j'organise des journées jeux de société, je cours, je grimpe, j'habite chez mes chats et je fais des jeux de mots nuls`,
+  `J'ai 36 ans, dont 20 passés à coder dans divers langages. Je suis curieux, méthodique et exigeant quant à la qualité du code et je n'hésite pas à poser des questions.`,
+  `Je me déplace essentiellement à vélo, j'organise des journées jeux de société, je cours, je grimpe, j'habite chez mes chats et je fais des jeux de mots nuls`,
 ];

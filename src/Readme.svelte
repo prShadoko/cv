@@ -1,9 +1,15 @@
 <script>
+    import Mark from './Mark.svelte';
+
   const { readme } = $props();
 </script>
 
 <div id="readme">
-  <div class="head">Readme</div>
+  <Mark position="top-left" direction="right" />
+  <Mark position="top-right" direction="left" />
+  <Mark position="bottom-left" direction="top-right" />
+  <Mark position="bottom-right" direction="top-left" />
+  <div class="head font-light">readme.txt<span class="num">05</span></div>
   <div class="body">
     {#each readme as readmeBlock}
     <div>{readmeBlock}</div>
@@ -13,17 +19,11 @@
 
 
 <style>
-  .head {
-    background-color: #127189;
-    border-radius: 4px 4px 0 0;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-    font-weight: 600;
-    font-size: 1.05rem;
+  #readme {
+    position: relative;
   }
 
   .body {
-    background-color: #1a87a3;
-    border-radius: 0 0 4px 4px;
     padding: var(--spacing);
     display: flex;
     flex-direction: column;

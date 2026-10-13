@@ -1,9 +1,13 @@
 <script>
+    import Mark from './Mark.svelte';
+
   const { hobbies } = $props();
 </script>
 
 <div id="hobbies">
-  <div class="head">Loisirs</div>
+  <Mark position="top-left" direction="right" />
+  <Mark position="top-right" direction="left" />
+  <div class="head font-light">loisirs.sav<span class="num">03</span></div>
   <div class="body">
     {#each hobbies as hobby}
     <div class="hobby">{hobby}</div>
@@ -13,17 +17,11 @@
 
 
 <style>
-  .head {
-    background-color: #127189;
-    border-radius: 4px 4px 0 0;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-    font-weight: 600;
-    font-size: 1.05rem;
+  #hobbies {
+    position: relative;
   }
-
+  
   .body {
-    background-color: #1a87a3;
-    border-radius: 0 0 4px 4px;
     padding: var(--spacing);
     /* display: flex; */
     gap: calc(.5 * var(--spacing)) var(--spacing);

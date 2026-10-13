@@ -1,23 +1,29 @@
 <script>
+    import Mark from './Mark.svelte';
+
   const { abilities: abilitiesGroup } = $props();
 </script>
 
 <div id="abilities">
-  <div class="head">Compétences</div>
+  <Mark position="top-left" direction="bottom" />
+  <Mark position="top-right" direction="left" />
+  <div class="head font-light">compétences.log<span class="num">01</span></div>
   <div class="body">
     {#each abilitiesGroup as { category, abilities }}
     <div class="category">
-      <div class="label">{category}</div>
+      <div class="label font-heavy">{category}</div>
       {#each abilities as { ability, level }}
       <div class="ability">
-        <div class="level">
-          <div class={`level-${level}`}>
-            {#each { length: 5 }}
-            <div></div>
-            {/each}
-          </div>
-        </div>
+        <Mark position="top-left" direction="bottom-right" arm={3} color="var(--color-medium-light)" />
+        <Mark position="top-right" direction="bottom-left" arm={3} color="var(--color-medium-light)" />
+        <Mark position="bottom-left" direction="top-right" arm={3} color="var(--color-medium-light)" />
+        <Mark position="bottom-right" direction="top-left" arm={3} color="var(--color-medium-light)" />
         <div class="label">{ability}</div>
+        <div class={['level', `level-${level}`]}>
+          {#each { length: 5 }}
+          <div></div>
+          {/each}
+        </div>
       </div>
       {/each}
     </div>
@@ -29,88 +35,68 @@
 <style>
   #abilities {
     height: fit-content;
-  }
-
-  .head {
-    background-color: #127189;
-    border-radius: 4px 4px 0 0;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-    font-weight: 600;
-    font-size: 1.05rem;
+    position: relative;
   }
 
   .body {
-    background-color: #1a87a3;
-    border-radius: 0 0 4px 4px;
     padding: var(--spacing);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: calc(.5 * var(--spacing)) var(--spacing);
+    gap: 1px;
 
     .category {
       display: contents;
 
       & > .label {
-        color: #ffffff60;
-        font-weight: 600;
-        font-size: 2.6rem;
         text-transform: uppercase;
         text-align: right;
         grid-column: 1 / 3;
-        margin-bottom: -.5em;
+        margin-bottom: 2px;
       }
       &:not(:first-child) > .label {
         margin-top: var(--spacing);
       }
 
       .ability {
+        position: relative;
+
         & > .label {
           display: inline-block;
-          background-color: #1a87a3;
-          /* TODO: use some blur or stick strictly to flat design? */
-          /* background-color: #1a87a3a3; */
-          /* backdrop-filter: blur(2px); */
+          background-color: var(--color-light);
           border-radius: 4px;
 
-          font-size: 1.05em;
-          padding: 4px 8px 0;
-          margin-left: 4px;
+          padding: 0 4px;
         }
 
         .level {
-          margin: 0 calc(-.25 * var(--spacing)) calc(-.75 * var(--spacing));
-          background-color: #1a87a3;
           padding: calc(.25 * var(--spacing));
-          border-radius: 4px;
 
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: stretch;
+          flex-wrap: nowrap;
+          gap: 4px;
+          
           & > div {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: stretch;
-            flex-wrap: nowrap;
-            gap: 4px;
+            flex-grow: 1;
+            height: .9lh;
             
-            & > div {
-              flex-grow: 1;
-              height: .9lh;
-              
-              background-color: #ffffff;
-              border-radius: 2px;
-            }
-
-            &.level-1 > div:nth-child(2),
-            &.level-1 > div:nth-child(3),
-            &.level-1 > div:nth-child(4),
-            &.level-1 > div:nth-child(5),
-            &.level-2 > div:nth-child(3),
-            &.level-2 > div:nth-child(4),
-            &.level-2 > div:nth-child(5),
-            &.level-3 > div:nth-child(4),
-            &.level-3 > div:nth-child(5),
-            &.level-4 > div:nth-child(5) {
-              background-color: #ffffff50;
-            }
+            background-color: var(--color-medium-dark);
+          }
+            
+          &.level-1 > div:nth-child(2),
+          &.level-1 > div:nth-child(3),
+          &.level-1 > div:nth-child(4),
+          &.level-1 > div:nth-child(5),
+          &.level-2 > div:nth-child(3),
+          &.level-2 > div:nth-child(4),
+          &.level-2 > div:nth-child(5),
+          &.level-3 > div:nth-child(4),
+          &.level-3 > div:nth-child(5),
+          &.level-4 > div:nth-child(5) {
+            background: none;
+            border: solid 1px var(--color-dark);
           }
         }
       }

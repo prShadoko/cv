@@ -1,38 +1,37 @@
 <script>
+    import Mark from './Mark.svelte';
+
   const { experiences } = $props();
 </script>
 
 <div id="timeline">
-  <div id="branches">
-    <div class="branch" id="main"></div>
-    <div class="branch" id="formation"></div>
-    <div class="branch" id="job"></div>
+  <Mark position="top-left" direction="right" />
+  <Mark position="bottom-right" direction="top" />
+  {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
+  <div class={['timestamp', branch, 'font-light']}>
+    {#if duration}
+    <div class="duration">{duration} /&nbsp;</div>
+    {/if}
+    <div class="period">{start}{end ? `-${end}` : ''}<span class="font-light">&gt;&gt;&gt;&gt;</span></div>
   </div>
-  <div id="xp">
-    {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
-    <div class={['peg', branch]}>
-      <div></div>
+  <div class={['content', branch]}>
+    <div class="title font-heavy">{@html title}</div>
+    {#if location}
+    <div class="location font-light">@&nbsp;{@html location}</div>
+    {/if}
+    {#if missions}
+    <!-- <div class="missions">{@html missions.map((m) => m.replace(' ', '&nbsp;')).join('&nbsp;/ ')}</div> -->
+    <div class="missions">
+      {#each missions as m, i}
+      <div>{@html m}{#if i < missions.length - 1}&nbsp;/ {/if}</div>
+      {/each}
     </div>
-    <div class={['timestamp', branch]}>
-      <div class="period">{start}{end ? ` - ${end}` : ''}</div>
-      {#if duration}
-      <div class="duration">{duration}</div>
-      {/if}
-    </div>
-    <div class={['content', branch]}>
-      <div class="title">{@html title}</div>
-      {#if location}
-      <div class="location">@&nbsp;{@html location}</div>
-      {/if}
-      {#if missions}
-      <div class="missions">{@html missions.join(' ; ')}</div>
-      {/if}
-      {#if stack}
-      <div class="stack">{@html stack.join(' ; ')}</div>
-      {/if}
-    </div>
-    {/each}
+    {/if}
+    {#if stack}
+    <div class="stack font-light">[ {@html stack.join(' | ')} ]</div>
+    {/if}
   </div>
+  {/each}
 </div>
 
 
@@ -43,134 +42,44 @@
     position: relative;
     top: -0.4em;
     line-height: 0;
+    text-transform: none;
   }
 
   #timeline {
     position: relative;
-  }
-
-  #branches {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 4px;
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing);
-    width: fit-content;
-    height: 100%;
-
-    .branch {
-      width: 8px;
-      height: 100%;
-
-      &#main {
-        background-color: var(--color-main);
-      }
-
-      &#formation {
-        background-color: var(--color-formation);
-      }
-
-      &#job {
-        background-color: var(--color-job);
-      }
-    }
-  }
-
-  #xp {
-    position: relative;
+    
     display: grid;
-    grid-template-columns: 76px auto auto;
-    row-gap: 8px;
+    grid-template-columns: auto auto;
+    /* gap: calc(.5 * var(--spacing)); */
+    gap: var(--spacing) calc(.25 * var(--spacing));
     width: fit-content;
-    height: max-content;
-  }
+    height: fit-content;
+    padding: var(--spacing);
 
-  .peg {
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    div {
-      height: 16px;
-    }
+    color: #291c1c;
   }
 
   .timestamp,
   .content {  
-    min-height: 2rem;
-    line-height: 130%;
+    line-height: 1.3rem;
+    padding: calc(.5 * var(--spacing));
   }
-
-  :global(.job) {
-    &.content {
-      background-color: var(--color-job-light);
-    }
-
-    &.timestamp,
-    &.peg > div {
-      background-color: var(--color-job);
-    }
-    &.peg > div {
-      width: 28px;
-      clip-path: path("M 28,12 v -8 H 14.926826 a 8,8,0,1,0,0,8 Z");
-    }
-  }
-
-  :global(.formation) {
-    &.content {
-      background-color: var(--color-formation-light);
-    }
-    
-    &.timestamp,
-    &.peg > div {
-      background-color: var(--color-formation);
-    }
-    &.peg > div {
-      width: 52px;
-      clip-path: path("M 52,12 v -8 H 14.926826 a 8,8,0,1,0,0,8 Z");
-    }
-  }
-
-  :global(.main) {
-    &.content {
-      background-color: var(--color-main-light);
-    }
-    
-    &.timestamp,
-    &.peg > div {
-      background-color: var(--color-main);
-    }
-    &.peg > div {
-      width: 76px;
-      clip-path: path("M 76,12 v -8 H 14.926826 a 8,8,0,1,0,0,8 Z");
-    }
-  }
-
-  /*
-  #1a87a3
-  #127189
-
-  #004757
-  #b9cad0
-  */
 
   .timestamp {
     display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-    padding: var(--spacing);
-    border-radius: 4px 0 0 4px;
+    justify-content: end;
+    letter-spacing: -8%;
+    font-size: .8rem;
+    padding-right: 0;
 
-    text-align: center;
-    width: 76px;
-    
-    .period {
-      /* font-family: 'Barlow Condensed', sans-serif; */
-      letter-spacing: -3%;
+    .duration {
+      color: var(--color-medium);
+    }
+
+    .period > span {
+      display: inline-block;
+      padding: 0 calc(.5 * var(--spacing));
+      color: var(--color-medium);
     }
   }
 
@@ -180,24 +89,21 @@
     flex-wrap: wrap;
     flex-grow: 1;
     justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing);
-    border-radius: 0 4px 4px 0;
+    padding-left: 0;
 
-    & > * {
-      flex-shrink: 0;
-      flex-grow: 0;
+    & > :not(:last-child) {
+      margin-bottom: 4px;
     }
   }
 
   .title {
     font-size: 1.05rem;
-    font-weight: 600;
     flex-shrink: 0;
   }
 
   .location {
     width: fit-content;
+    font-size: .8rem;
   }
 
   .missions,
@@ -205,18 +111,7 @@
     flex-basis: 100%;
   }
 
-  .duration,
-  .location,
   .stack {
-    font-size: .9em;
-  }
-
-  .stack {
-    font-style: italic;
-  }
-
-  /* add spacing after title row, only if there is another row */
-  .location + * {
-    margin-top: .3em;
+    font-size: .75rem;
   }
 </style>

@@ -1,9 +1,13 @@
 <script>
+    import Mark from './Mark.svelte';
+
   const { languages } = $props();
 </script>
 
 <div id="languages">
-  <div class="head">Langues</div>
+  <Mark position="top-left" direction="right" />
+  <Mark position="top-right" direction="left" />
+  <div class="head font-light">langues.xlf<span class="num">02</span></div>
   <div class="body">
     {#each languages as { lang, level, certificates }}
     <div class="language">
@@ -23,24 +27,11 @@
 
 
 <style>
-  /*
-  #1a87a3
-  #127189
-  
-  #004757
-  #b9cad0
-  */
-  .head {
-    background-color: #667f8c;
-    border-radius: 4px 4px 0 0;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-    font-weight: 600;
-    font-size: 1.05rem;
+  #languages {
+    position: relative;
   }
 
   .body {
-    background-color: #7d9aa9;
-    border-radius: 0 0 4px 4px;
     padding: var(--spacing);
     /* display: flex; */
     display: grid;
@@ -48,17 +39,11 @@
     gap: calc(.5 * var(--spacing)) var(--spacing);
 
     .language {
-      /* display: contents; */
       grid-column: 1;
 
       & > .label {
-        /* grid-column: 1; */
-        font-weight: 600;
         text-transform: capitalize;
       }
-      /* &:not(:first-child) > .label {
-        margin-top: var(--spacing);
-      } */
 
       .level {
         flex-grow: 1;
@@ -71,7 +56,6 @@
       .name,
       .year,
       .score {
-        font-style: italic;
         font-size: .9em;
       }
     }

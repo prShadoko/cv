@@ -1,14 +1,10 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
-	import '@fontsource-variable/commissioner';
-	import '@fontsource/barlow/200.css';
-	import '@fontsource/barlow/600.css';
-	import '@fontsource/barlow-condensed/200.css';
-	import '@fontsource-variable/urbanist';
 	import '@fontsource-variable/quicksand';
-	import '@fontsource-variable/vazirmatn';
-	import '@fontsource/fira-sans/200.css';
-	import '@fontsource/fira-sans/600.css';
+	import '@fontsource-variable/sometype-mono';
+	import '@fontsource-variable/urbanist';
+	// import '@fontsource/barlow/300.css';
+	// import '@fontsource/barlow/400.css';
 
 	let { children } = $props();
 </script>
@@ -22,20 +18,52 @@
 <style>
   :global(body) {
     --spacing: 16px;
-		--color-job: #008786;
-		--color-job-light: #249e91;
-		--color-formation: #6a9f87;
-		--color-formation-light: #81bea1;
-		--color-main: #667f8c;
-		--color-main-light: #7d9aa9;
+		
+		--color-dark: #291c1c;
+		--color-medium-dark: #5d524d;
+		--color-medium: #9e9089;
+		--color-medium-light: #c0b7b2;
+		--color-light: #f0ece5;
 
-    color: white;
-    /* font-family: 'Commissioner Variable', sans-serif; */
-    /* font-family: 'Urbanist Variable', sans-serif; */
-    /* font-family: 'Quicksand Variable', sans-serif; */
-    /* font-family: 'Vazirmatn Variable', sans-serif; */
-    /* font-family: 'Fira Sans', sans-serif; */
-    font-family: 'Barlow', sans-serif;
+		--color-border: var(--color-medium-light);
+
+		--font-heavy: 'Urbanist Variable', sans-serif;
+		/* --font-regular: 'Barlow', sans-serif; */
+		--font-regular: 'Quicksand Variable', sans-serif;
+		--font-light: 'Sometype Mono Variable', monospace;
+
+		box-sizing: border-box;
+		:global(*, *::before, *::after) {
+			box-sizing: inherit;
+		}
+
+		/* Make it look nice to print on A4 */
+		aspect-ratio: 210 / 297;
+
+    color: var(--color-dark);
+		background-color: var(--color-light);
+    
+		font-family: var(--font-regular);
     font-weight: 200;
   }
+
+	:global(.font-heavy) {
+		font-family: var(--font-heavy);
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: 1em;
+	}
+
+	:global(.font-regular) {
+		font-family: var(--font-regular);
+		font-weight: 400;
+		font-size: .9em;
+		letter-spacing: 2%;
+	}
+
+	:global(.font-light) {
+		font-family: var(--font-light);
+		font-weight: 100;
+		font-size: 1em;
+	}
 </style>

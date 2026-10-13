@@ -1,37 +1,36 @@
 <script>
   const { contact } = $props();
 
-  import { Mail, MapPin, MoveRight, Phone } from '@lucide/svelte';
+  import { Mail, MapPin, Phone } from '@lucide/svelte';
+    import Mark from './Mark.svelte';
 </script>
 
 <div id="contact">
-  <div class="head">Contact</div>
+  <Mark position="top-left" direction="right" />
+  <Mark position="top-right" direction="left" />
+  <Mark position="bottom-left" direction="right" />
+  <Mark position="bottom-right" direction="left" />
+  <div class="head font-light">contact.vcf<span class="num">04</span></div>
   <div class="body">
     <div>
-      <a href="tel:{contact.phone}"><Phone class="icon" />{contact.phone}</a>
+      <a href="tel:{contact.phone}" class="button"><Phone class="icon" />{contact.phone}</a>
     </div>
     <div>
-      <a href="mailto:{contact.email}"><Mail class="icon" />{contact.email}</a>
+      <a href="mailto:{contact.email}" class="button"><Mail class="icon" />{contact.email}</a>
     </div>
     <div>
-      <a href={contact.addressMap} target="_blank"><MapPin class="icon" />{@html contact.address}</a>
+      <a href={contact.addressMap} target="_blank" class="button"><MapPin class="icon" />{@html contact.address}</a>
     </div>
   </div>
 </div>
 
 
 <style>
-  .head {
-    background-color: #667f8c;
-    border-radius: 4px 4px 0 0;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-    font-weight: 600;
-    font-size: 1.05rem;
+  #contact {
+    position: relative;
   }
 
   .body {
-    background-color: #7d9aa9;
-    border-radius: 0 0 4px 4px;
     padding: var(--spacing);
     display: flex;
     flex-direction: column;

@@ -12,7 +12,7 @@
   const terminal = [
     `ps -C 'candidate_search'<br />  PID TTY         TIME CMD<br /> 1337 tty1    00:00:00 candidate_search`,
     `kill 1337`,
-    `sudo hire \\<br />--name='thomas richard'\\<br />--job 'dev backend'<br />Password:█`,
+    `sudo hire \\<br />--name='thomas richard'\\<br />--job='dev backend'<br />Password:█`,
   ];
   const footerMessage = '========WW91IGFjdHVhbGx5IHRvb2sgdGhlIHRpbWUgdG8gZGVjb2RlIHRoaXM/IEkgbXVzdCBoYXZlIGNhdWdodCB5b3VyIGV5ZSwgdGhlbi4gV2VsbCwgeW91IGtub3cgd2hhdCB0byBkbyBuZXh04oCm========';
 </script>

@@ -37,9 +37,6 @@
 			box-sizing: inherit;
 		}
 
-		/* Make it look nice to print on A4 */
-		aspect-ratio: 210 / 297;
-
     color: var(--color-dark);
 		background-color: var(--color-light);
     

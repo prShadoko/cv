@@ -8,10 +8,17 @@
   import Timeline from '../Timeline.svelte';
 
   const { data } = $props();
+
+  const terminal = [
+    `ps -C 'candidate_search'<br />  PID TTY         TIME CMD<br /> 1337 tty1    00:00:00 candidate_search`,
+    `kill 1337`,
+    `sudo hire \\<br />--name='thomas richard'\\<br />--job 'dev backend'<br />Password:█`,
+  ];
+  const footerMessage = '========WW91IGFjdHVhbGx5IHRvb2sgdGhlIHRpbWUgdG8gZGVjb2RlIHRoaXM/IEkgbXVzdCBoYXZlIGNhdWdodCB5b3VyIGV5ZSwgdGhlbi4gV2VsbCwgeW91IGtub3cgd2hhdCB0byBkbyBuZXh04oCm========';
 </script>
 
-<div class="body">
-  <div id="header" class="font-heavy">
+<div class="main">
+  <div id="header" class="border font-heavy">
     <Mark position="top-left" direction="bottom-right" />
     <Mark position="top-right" direction="bottom-left" />
     <div id="titles">
@@ -27,73 +34,48 @@
     </div>
   </div>
   <Timeline experiences={data.experiences}></Timeline>
-  <Abilities abilities={data.abilities}></Abilities>
-  <Languages languages={data.languages}></Languages>
-  <Hobbies hobbies={data.hobbies}></Hobbies>
-  <Contact contact={data.contact}></Contact>
-  <div id="terminal" class="font-light">$&gt; sudo hire --name='thomas richard'<br />Password:█</div>
+  <div id="aside">
+    <Abilities abilities={data.abilities}></Abilities>
+    <Languages languages={data.languages}></Languages>
+    <Hobbies hobbies={data.hobbies}></Hobbies>
+    <Contact contact={data.contact}></Contact>
+    <div id="terminal" class="font-light">
+    {#each terminal as t}
+    <div>{@html t}</div>
+    {/each}
+    </div>
+  </div>
   <Readme readme={data.readme}></Readme>
+  <div id="footer" class="border font-light">
+    <Mark position="bottom-left" direction="top-right" />
+    <Mark position="bottom-right" direction="top-left" />
+    {footerMessage}
+  </div>
 </div>
 
 
 <style>
-/* TODO: add animations */
-/* :global .glitch {
-  box-shadow: 6px 2px magenta, -3px -4px cyan, 2px -5px yellow;
-  text-shadow: 6px 2px magenta, -3px -4px cyan, 2px -5px yellow;
-} */
-
-:global .button {
-  position: relative;
-  display: inline-block;
-  padding: 0 calc(.75 * var(--spacing));
-  cursor: pointer;
-  
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border: 1px solid var(--color-medium);
-    width: 4px;
-    top: -1px;
-    bottom: -1px;
-  }
-  
-  &::before {
-    border-right: none;
-    left: -1px;
-  }
-  
-  &::after {
-    border-left: none;
-    right: -1px;
-  }
-}
-
-.body {
+.main {
   position: relative;
 
   width: 1100px;
+  /* Make it look nice to print on A4 */
+  aspect-ratio: 210 / 297;
   margin: auto;
 
   display: grid;
-  /* align-content: start; */
-  grid-template-columns: 5fr 2fr;
-  grid-template-rows: repeat(5, auto) 1fr auto;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto 1fr auto;
   gap: 1px;
 
   border: 1px solid var(--color-border);
 
   :global(& > *) {
-    border: 1px solid var(--color-border);
-    margin: -1px;
+    display: inline-block;
   }
 
   #header {
     --header-spacing: 1.6rem;
-
-    grid-column: 1 / 3;
-    grid-row: 1;
 
     padding: var(--header-spacing);
     text-align: right;
@@ -136,57 +118,116 @@
     }
   }
 
-  :global #timeline {
-    grid-column: 1;
-    grid-row: 2 / 7;
-  }
-
-  :global #abilities {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  :global #languages {
-    grid-column: 2;
-    grid-row: 3;
-  }
-
-  :global #hobbies {
-    grid-column: 2;
-    grid-row: 4;
-  }
-
-  :global #contact {
-    grid-column: 2;
-    grid-row: 5;
+  #aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
   }
 
   #terminal {
-    grid-column: 2;
-    grid-row: 6;
-
-    padding: calc(.25 * var(--spacing));
+    flex-grow: 1;
+    padding: calc(.5 * var(--spacing));
     background-color: var(--color-medium-light);
     color: var(--color-medium-dark);
-    font-size: .6em;
-  }
+    font-size: .8em;
 
-  :global #readme {
-    grid-column: 1 / 3;
-    grid-row: 7;
-  }
-
-  :global .head {
-    border: 1px solid var(--color-border);
-    margin: -1px;
-    padding: calc(.5 * var(--spacing)) var(--spacing);
-
-    display: flex;
-    justify-content: space-between;
-
-    .num {
-      color: var(--color-medium);
+    & > div {
+      white-space: pre-wrap;
+      &::before {
+        content: '$> ';
+      }
     }
+  }
+
+  #header,
+  :global(#readme),
+  #footer {
+    grid-column: 1 / 3;
+  }
+
+  #footer {
+    padding: calc(.5 * var(--spacing)) var(--spacing);
+    font-size: .75em;
+    color: var(--color-medium);
+    text-align: center;
+  }
+}
+
+/* GLOBAL STYLES */
+
+/* TODO: add animations */
+:global .glitch {
+  animation: 1.5s step-end 0s infinite glitch-color;
+}
+
+@keyframes glitch-color {
+  0% {
+    box-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
+    text-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
+  }
+  5% {
+    box-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
+    text-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
+  }
+  13% {
+    box-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
+    text-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
+  }
+  20% {
+    box-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
+    text-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
+  }
+  30% {
+    box-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
+    text-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
+  }
+  40% {
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+:global .border {
+  border: 1px solid var(--color-border);
+  margin: -1px;
+}
+
+:global .head {
+  margin: -1px;
+  padding: calc(.5 * var(--spacing)) var(--spacing);
+
+  display: flex;
+  justify-content: space-between;
+
+  .num {
+    color: var(--color-medium);
+  }
+}
+
+:global .button {
+  position: relative;
+  display: inline-block;
+  padding: 0 calc(.75 * var(--spacing));
+  cursor: pointer;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border: 1px solid var(--color-medium);
+    width: 4px;
+    top: -1px;
+    bottom: -1px;
+  }
+  
+  &::before {
+    border-right: none;
+    left: -1px;
+  }
+  
+  &::after {
+    border-left: none;
+    right: -1px;
   }
 }
 </style>

@@ -7,8 +7,9 @@
 <div id="hobbies">
   <Mark position="top-left" direction="right" />
   <Mark position="top-right" direction="left" />
-  <div class="head font-light">loisirs.sav<span class="num">03</span></div>
-  <div class="body">
+
+  <div class="head border font-light">loisirs.sav<span class="num">03</span></div>
+  <div class="body border">
     {#each hobbies as hobby}
     <div class="hobby">{hobby}</div>
     {/each}
@@ -19,8 +20,12 @@
 <style>
   #hobbies {
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
   }
-  
+
   .body {
     padding: var(--spacing);
     /* display: flex; */

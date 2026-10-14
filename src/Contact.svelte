@@ -10,8 +10,9 @@
   <Mark position="top-right" direction="left" />
   <Mark position="bottom-left" direction="right" />
   <Mark position="bottom-right" direction="left" />
-  <div class="head font-light">contact.vcf<span class="num">04</span></div>
-  <div class="body">
+
+  <div class="head border font-light">contact.vcf<span class="num">04</span></div>
+  <div class="body border">
     <div>
       <a href="tel:{contact.phone}" class="button"><Phone class="icon" />{contact.phone}</a>
     </div>
@@ -28,6 +29,10 @@
 <style>
   #contact {
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
   }
 
   .body {

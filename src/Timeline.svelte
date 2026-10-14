@@ -4,15 +4,16 @@
   const { experiences } = $props();
 </script>
 
-<div id="timeline">
+<div id="timeline" class="border">
   <Mark position="top-left" direction="right" />
   <Mark position="bottom-right" direction="top" />
+
   {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
   <div class={['timestamp', branch, 'font-light']}>
     {#if duration}
     <div class="duration">{duration} /&nbsp;</div>
     {/if}
-    <div class="period">{start}{end ? `-${end}` : ''}<span class="font-light">&gt;&gt;&gt;&gt;</span></div>
+    <div class="period">{start}{end ? `-${end}` : ''}<span class="font-light">&nbsp;&gt;&gt;&gt;&gt;&nbsp;</span></div>
   </div>
   <div class={['content', branch]}>
     <div class="title font-heavy">{@html title}</div>
@@ -23,7 +24,7 @@
     <!-- <div class="missions">{@html missions.map((m) => m.replace(' ', '&nbsp;')).join('&nbsp;/ ')}</div> -->
     <div class="missions">
       {#each missions as m, i}
-      <div>{@html m}{#if i < missions.length - 1}&nbsp;/ {/if}</div>
+      <div>{@html m}</div>
       {/each}
     </div>
     {/if}
@@ -45,13 +46,17 @@
     text-transform: none;
   }
 
+  .sep {
+    color: var(--color-medium);
+  }
+
   #timeline {
     position: relative;
     
-    display: grid;
+    display: inline-grid;
     grid-template-columns: auto auto;
     /* gap: calc(.5 * var(--spacing)); */
-    gap: var(--spacing) calc(.25 * var(--spacing));
+    gap: var(--spacing) 0;
     width: fit-content;
     height: fit-content;
     padding: var(--spacing);
@@ -62,7 +67,7 @@
   .timestamp,
   .content {  
     line-height: 1.3rem;
-    padding: calc(.5 * var(--spacing));
+    padding: calc(.5 * var(--spacing)) 0;
   }
 
   .timestamp {
@@ -70,7 +75,7 @@
     justify-content: end;
     letter-spacing: -8%;
     font-size: .8rem;
-    padding-right: 0;
+    /* padding-right: 0; */
 
     .duration {
       color: var(--color-medium);
@@ -78,7 +83,6 @@
 
     .period > span {
       display: inline-block;
-      padding: 0 calc(.5 * var(--spacing));
       color: var(--color-medium);
     }
   }
@@ -89,7 +93,6 @@
     flex-wrap: wrap;
     flex-grow: 1;
     justify-content: space-between;
-    padding-left: 0;
 
     & > :not(:last-child) {
       margin-bottom: 4px;

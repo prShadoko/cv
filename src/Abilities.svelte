@@ -7,8 +7,9 @@
 <div id="abilities">
   <Mark position="top-left" direction="bottom" />
   <Mark position="top-right" direction="left" />
-  <div class="head font-light">compétences.log<span class="num">01</span></div>
-  <div class="body">
+
+  <div class="head border font-light">compétences.log<span class="num">01</span></div>
+  <div class="body border">
     {#each abilitiesGroup as { category, abilities }}
     <div class="category">
       <div class="label font-heavy">{category}</div>
@@ -34,8 +35,11 @@
 
 <style>
   #abilities {
-    height: fit-content;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
   }
 
   .body {

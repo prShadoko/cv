@@ -23,8 +23,8 @@
       <Mark position="top-right" direction="bottom-left" color="var(--color-medium-light)" />
       <Mark position="bottom-left" direction="top-right" color="var(--color-medium-light)" />
       <Mark position="bottom-right" direction="top-left" color="var(--color-medium-light)" />
-      <img src="" />
-</div>
+      <img src="octopus.jpg" alt="my face (almost)" />
+    </div>
   </div>
   <Timeline experiences={data.experiences}></Timeline>
   <Abilities abilities={data.abilities}></Abilities>

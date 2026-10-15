@@ -36,9 +36,6 @@
 
     color: var(--color-dark);
 		background-color: var(--color-light);
-    
-		font-family: var(--font-regular);
-    font-weight: 200;
   }
 
 	:global(.font-heavy) {

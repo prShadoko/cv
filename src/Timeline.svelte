@@ -60,8 +60,6 @@
     width: fit-content;
     height: fit-content;
     padding: var(--spacing);
-
-    color: #291c1c;
   }
 
   .timestamp,

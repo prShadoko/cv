@@ -66,7 +66,6 @@
 
         & > .label {
           display: inline-block;
-          background-color: var(--color-light);
           border-radius: 4px;
 
           padding: 0 4px;
@@ -87,6 +86,7 @@
             height: .9lh;
             
             background-color: var(--color-medium-dark);
+            border: solid 1px var(--color-medium-dark);
           }
             
           &.level-1 > div:nth-child(2),
@@ -100,7 +100,6 @@
           &.level-3 > div:nth-child(5),
           &.level-4 > div:nth-child(5) {
             background: none;
-            border: solid 1px var(--color-dark);
           }
         }
       }

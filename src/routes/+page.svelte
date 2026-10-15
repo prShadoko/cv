@@ -129,7 +129,7 @@
     padding: calc(.5 * var(--spacing));
     background-color: var(--color-medium-light);
     color: var(--color-medium-dark);
-    font-size: .8em;
+    font-size: .75rem;
 
     & > div {
       white-space: pre-wrap;

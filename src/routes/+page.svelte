@@ -72,9 +72,12 @@
     });
     glitch();
 
+    printButton.addEventListener('click', () => print());
+
     return () => {
       isGlitching = false;
       glitchButton.removeEventListener('click', toggleGlitch);
+      printButton.removeEventListener('click', print);
     };
   });
 </script>
@@ -82,6 +85,9 @@
 <div id="buttons">
   <button id="glitch-button" style={`--button-tooltip: '${isGlitching ? 'Disable glitch' : 'Enable glitch'}';`} bind:this={glitchButton}>
     {#if isGlitching}<Bug class="icon" />{:else}<BugOff class="icon" />{/if}
+  </button>
+  <button id="print-button" style={`--button-tooltip: 'Print';`} bind:this={printButton}>
+    <Printer class="icon" />
   </button>
 </div>
 

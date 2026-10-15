@@ -3,8 +3,6 @@
 	import '@fontsource-variable/quicksand';
 	import '@fontsource-variable/sometype-mono';
 	import '@fontsource-variable/urbanist';
-	// import '@fontsource/barlow/300.css';
-	// import '@fontsource/barlow/400.css';
 
 	let { children } = $props();
 </script>
@@ -28,7 +26,6 @@
 		--color-border: var(--color-medium-light);
 
 		--font-heavy: 'Urbanist Variable', sans-serif;
-		/* --font-regular: 'Barlow', sans-serif; */
 		--font-regular: 'Quicksand Variable', sans-serif;
 		--font-light: 'Sometype Mono Variable', monospace;
 

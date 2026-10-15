@@ -75,47 +75,71 @@
   &[class~="p-bottom"][class~="p-right"] {
     transform: translate(var(--half), var(--half));
   }
+  
+  .v, .h {
+    position: absolute;
+    background-color: var(--color);
+  }
+  
+  .v {
+    height: var(--dimension);
+    width: var(--thickness);
+    left: var(--arm);
+  }
+  
+  .h {
+    height: var(--thickness);
+    width: var(--dimension);
+    top: var(--arm);
+  }
+
+  &[class~="top"] .v {
+    height: var(--half);
+    top: var(--thickness); /* take the margin into account */
+    margin-top: calc(-1 * var(--thickness));
+  }
+
+  &[class~="bottom"] .v {
+    height: var(--half);
+    bottom: var(--thickness); /* take the margin into account */
+    margin-bottom: calc(-1 * var(--thickness));
+  }
+
+  &[class~="left"] .h {
+    width: var(--half);
+    left: var(--thickness); /* take the margin into account */
+    margin-left: calc(-1 * var(--thickness));
+  }
+
+  &[class~="right"] .h {
+    width: var(--half);
+    right: var(--thickness); /* take the margin into account */
+    margin-right: calc(-1 * var(--thickness));
+  }
 }
 
-
-.v, .h {
-  position: absolute;
-  background-color: var(--color);
-}
-
-.v {
-  height: var(--dimension);
-  width: var(--thickness);
-  left: var(--arm);
-}
-
-.h {
-  height: var(--thickness);
-  width: var(--dimension);
-  top: var(--arm);
-}
-
-.mark[class~="top"] .v {
-  height: var(--half);
-  top: var(--thickness); /* take the margin into account */
-  margin-top: calc(-1 * var(--thickness));
-}
-
-.mark[class~="bottom"] .v {
-  height: var(--half);
-  bottom: var(--thickness); /* take the margin into account */
-  margin-bottom: calc(-1 * var(--thickness));
-}
-
-.mark[class~="left"] .h {
-  width: var(--half);
-  left: var(--thickness); /* take the margin into account */
-  margin-left: calc(-1 * var(--thickness));
-}
-
-.mark[class~="right"] .h {
-  width: var(--half);
-  right: var(--thickness); /* take the margin into account */
-  margin-right: calc(-1 * var(--thickness));
+/* Use borders instead of backgrounds for print (it may ignore backgrounds if t) */
+@media print {
+  .mark {
+    .v, .h {
+      position: absolute;
+      border: 0 solid var(--color);
+      background: none;
+    }
+    
+    .v {
+      height: var(--dimension);
+      width: 0;
+      border-left-width: var(--thickness);
+      left: var(--arm);
+    }
+    
+    .h {
+      height: 0;
+      border-top-width: var(--thickness);
+      width: var(--dimension);
+      top: var(--arm);
+    }
+  }
 }
 </style>

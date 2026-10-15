@@ -182,8 +182,8 @@
   position: relative;
 
   width: 1100px;
-  /* Make it look nice to print on A4 */
-  aspect-ratio: 210 / 297;
+  /* Make it look nice to print on A4 (7mm margins) */
+  aspect-ratio: calc(210 - 2 * 7)  / calc(297 - 2 * 7);
   margin: auto;
 
   display: grid;
@@ -246,10 +246,13 @@
   }
 
   #terminal {
+    --color-background-terminal: var(--color-medium-light);
+    --color-font-terminal: var(--color-medium-dark);
+
     flex-grow: 1;
     padding: calc(.5 * var(--spacing));
-    background-color: var(--color-medium-light);
-    color: var(--color-medium-dark);
+    background-color: var(--color-background-terminal);
+    color: var(--color-font-terminal);
     font-size: .75rem;
 
     & > div {
@@ -376,9 +379,46 @@
 }
 	
 @media print {
+  #buttons {
+    display: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  /* Use borders instead of backgrounds for print (it may ignore backgrounds if t) */
   .main #terminal {
     --color-background-terminal: var(--color-light);
     --color-font-terminal: var(--color-dark);
+
+    position: relative;
+    background: none;
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 0;
+
+      border-top: 300px solid var(--color-background-terminal);
+      z-index: -1;
+      
+      content: '';
+    }
+  }
+
+  :global .glitch {
+    animation: none;
+
+    .glitchable,
+    .glitchable-before::before,
+    .glitchable-before::after {
+      animation: none;
+    }
   }
 }
 </style>

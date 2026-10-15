@@ -23,6 +23,7 @@
 		--color-medium-light: #c0b7b2;
 		--color-light: #f0ece5;
 
+		--color-background: var(--color-light);
 		--color-border: var(--color-medium-light);
 
 		--font-heavy: 'Urbanist Variable', sans-serif;
@@ -34,8 +35,11 @@
 			box-sizing: inherit;
 		}
 
+		position: relative;
+		margin: var(--spacing);
+
     color: var(--color-dark);
-		background-color: var(--color-light);
+		background-color: var(--color-background);
   }
 
 	:global(.font-heavy) {
@@ -61,6 +65,13 @@
 	@media print {
 		:global(body) {
 			--color-background: none;
+
+			margin: 1px;
 		}
+	}
+
+	@page {
+		size: A4 portrait;
+		margin: 7mm;
 	}
 </style>

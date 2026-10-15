@@ -34,13 +34,12 @@
 
 
 <style>
-  #abilities {
-    position: relative;
+#abilities {
+  position: relative;
 
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 
   .body {
     padding: var(--spacing);
@@ -105,4 +104,28 @@
       }
     }
   }
+}
+
+/* Use borders instead of backgrounds for print (it may ignore backgrounds if t) */
+@media print {
+  #abilities > .body > .category > .ability > .level {
+    & > .step {
+      border: 0 solid var(--color-medium-dark);
+      border-top-width: .9lh;
+    }
+        
+    &.level-1 > div:nth-child(2),
+    &.level-1 > div:nth-child(3),
+    &.level-1 > div:nth-child(4),
+    &.level-1 > div:nth-child(5),
+    &.level-2 > div:nth-child(3),
+    &.level-2 > div:nth-child(4),
+    &.level-2 > div:nth-child(5),
+    &.level-3 > div:nth-child(4),
+    &.level-3 > div:nth-child(5),
+    &.level-4 > div:nth-child(5) {
+      border: solid 1px var(--color-medium-dark);
+    }
+  }
+}
 </style>

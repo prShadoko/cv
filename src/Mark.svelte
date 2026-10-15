@@ -5,11 +5,13 @@
     color?: string;
     arm?: number;
     thickness?: number;
+    class?: string;
   }
   
-  const { direction = 'all', position, color = 'var(--color-dark)', arm = 5, thickness = 1 }: Props = $props();
+  const { direction = 'all', position, color = 'var(--color-dark)', arm = 5, thickness = 1, class: cssClass = '' }: Props = $props();
 
   const classes = $derived([
+    ...(Array.isArray(cssClass) ? cssClass : cssClass.split(' ')),
     'mark',
     direction.replace('-', ' '),
     position.split('-').map((pos) => `p-${pos}`),

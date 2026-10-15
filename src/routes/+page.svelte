@@ -6,8 +6,12 @@
   import Mark from '../Mark.svelte';
   import Readme from '../Readme.svelte';
   import Timeline from '../Timeline.svelte';
+  import { onMount } from 'svelte';
+  import { Bug, BugOff, Printer } from '@lucide/svelte';
 
   const { data } = $props();
+  let isGlitching = $state(true);
+  let glitchButton, printButton;
 
   const terminal = [
     `ps -C 'candidate_search'<br />  PID TTY         TIME CMD<br /> 1337 tty1    00:00:00 candidate_search`,
@@ -15,9 +19,73 @@
     `sudo hire \\<br />--name='thomas richard'\\<br />--job='dev backend'<br />Password:█`,
   ];
   const footerMessage = '========WW91IGFjdHVhbGx5IHRvb2sgdGhlIHRpbWUgdG8gZGVjb2RlIHRoaXM/IEkgbXVzdCBoYXZlIGNhdWdodCB5b3VyIGV5ZSwgdGhlbi4gV2VsbCwgeW91IGtub3cgd2hhdCB0byBkbyBuZXh04oCm========';
+
+  const glitchTargets = [
+    'header',
+    'photo',
+    'timeline',
+    'abilities',
+    'languages',
+    'hobbies',
+    'contact',
+    'readme',
+    'terminal',
+    'footer',
+  ];
+
+  const glitchDuration = 750; // ms
+  const glitchDelay = { min: 500, max: 4000 }; // ms
+  const glitch = () => {
+    if (!isGlitching) {
+      return;
+    }
+
+    const delay = Math.floor(glitchDelay.min + Math.random() * glitchDelay.max );
+
+    setTimeout(
+      () => {
+        // We could clear the timeout before it triggers but this will do the job
+        if (!isGlitching) {
+          return;
+        }
+        const id = glitchTargets[Math.floor(Math.random() * glitchTargets.length)];
+        const elt = document.getElementById(id);
+        elt.classList.add('glitch');
+
+        setTimeout(
+          () => {
+            elt.classList.remove('glitch');
+            glitch();
+          },
+          glitchDuration
+        );
+      },
+      delay
+    );
+  }
+  const toggleGlitch = () => isGlitching = !isGlitching;
+
+  onMount(() => {
+    glitchButton.addEventListener('click', () => {
+      toggleGlitch();
+      glitch();
+    });
+    glitch();
+
+    return () => {
+      isGlitching = false;
+      glitchButton.removeEventListener('click', toggleGlitch);
+    };
+  });
 </script>
 
-<div class="main">
+<div id="buttons">
+  <button id="glitch-button" style={`--button-tooltip: '${isGlitching ? 'Disable glitch' : 'Enable glitch'}';`} bind:this={glitchButton}>
+    {#if isGlitching}<Bug class="icon" />{:else}<BugOff class="icon" />{/if}
+  </button>
+</div>
+
+<div class="main" style="--glitch-duration: {`${glitchDuration / 1000}s`};">
   <div id="header" class="border font-heavy">
     <Mark position="top-left" direction="bottom-right" />
     <Mark position="top-right" direction="bottom-left" />
@@ -39,7 +107,7 @@
     <Languages languages={data.languages}></Languages>
     <Hobbies hobbies={data.hobbies}></Hobbies>
     <Contact contact={data.contact}></Contact>
-    <div id="terminal" class="font-light">
+    <div id="terminal" class="font-light border">
     {#each terminal as t}
     <div>{@html t}</div>
     {/each}
@@ -55,6 +123,61 @@
 
 
 <style>
+#buttons {
+  --color-border-button: var(--color-medium-light);
+  --color-border-button-hover: var(--color-medium);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  gap: calc(.5 * var(--spacing));
+
+  :global(.icon) {
+    margin: calc(.5 * var(--spacing));
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+
+    padding: 0;
+
+    border: none;
+    background-color: inherit;
+    border: 1px solid var(--color-border-button);
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px var(--color-border-button);
+    cursor: pointer;
+    
+    overflow: hidden;
+    
+    &::after {
+      opacity: 0;
+      width: 0;
+
+      padding-right: 0;
+
+      content: var(--button-tooltip);
+      text-wrap: nowrap;
+
+      transition: all .5s;
+    }
+    
+    &:hover {
+      border: 1px solid var(--color-border-button-hover);
+      box-shadow: 0px 2px 1px var(--color-border-button-hover);
+
+      &::after {
+        opacity: 100%;
+        width: calc-size(fit-content, size);
+        padding-right: calc(.5 * var(--spacing));
+      }
+    }
+  }
+}
+
 .main {
   position: relative;
 
@@ -67,8 +190,6 @@
   grid-template-columns: auto auto;
   grid-template-rows: auto auto 1fr auto;
   gap: 1px;
-
-  border: 1px solid var(--color-border);
 
   :global(& > *) {
     display: inline-block;
@@ -155,9 +276,14 @@
 
 /* GLOBAL STYLES */
 
-/* TODO: add animations */
 :global .glitch {
-  animation: 1.5s step-end 0s infinite glitch-color;
+  animation: var(--glitch-duration) step-end 0s 1 glitch-color, var(--glitch-duration) step-end 0s 1 glitch-deform;
+  
+  .glitchable,
+  .glitchable-before::before,
+  .glitchable-before::after {
+    animation: .75s step-end 0s 1 glitch-color;
+  }
 }
 
 @keyframes glitch-color {
@@ -165,25 +291,43 @@
     box-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
     text-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
   }
-  5% {
+  10% {
     box-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
     text-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
   }
-  13% {
+  26% {
     box-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
     text-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
   }
-  20% {
+  40% {
     box-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
     text-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
   }
-  30% {
+  60% {
     box-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
     text-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
   }
-  40% {
+  80% {
     box-shadow: none;
     text-shadow: none;
+  }
+}
+
+@keyframes glitch-deform {
+  0% {
+    transform: skew(0, -1deg);
+  }
+  10% {
+    transform: skew(2deg, 0);
+  }
+  26% {
+    transform: skew(0, 5deg), translate(6px, 0);
+  }
+  40% {
+    transform: skew(0), translate(-2px, 4px);
+  }
+  60% {
+    transform: none;
   }
 }
 

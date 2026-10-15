@@ -230,4 +230,11 @@
     right: -1px;
   }
 }
+	
+@media print {
+  .main #terminal {
+    --color-background-terminal: var(--color-light);
+    --color-font-terminal: var(--color-dark);
+  }
+}
 </style>

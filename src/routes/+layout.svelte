@@ -60,4 +60,10 @@
 		font-weight: 100;
 		font-size: 1em;
 	}
+
+	@media print {
+		:global(body) {
+			--color-background: none;
+		}
+	}
 </style>

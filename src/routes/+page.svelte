@@ -11,7 +11,7 @@
 
   const { data } = $props();
   let isDarkTheme = $state(undefined);
-  let isGlitching = $state(true);
+  let isGlitching = $state(undefined);
   let themeButton, glitchButton, printButton;
 
   const terminal = [
@@ -73,12 +73,16 @@
       delay
     );
   }
-  const toggleGlitch = () => isGlitching = !isGlitching;
+  const toggleGlitch = () => {
+    isGlitching = !isGlitching;
+    localStorage.setItem('glitch', isGlitching);
+  };
 
   onMount(() => {
     isDarkTheme = document.documentElement.dataset['theme'] === 'dark';
     themeButton.addEventListener('click', toggleTheme);
 
+    isGlitching = localStorage.getItem('glitch') === 'true' ?? true;
     glitchButton.addEventListener('click', () => {
       toggleGlitch();
       glitch();

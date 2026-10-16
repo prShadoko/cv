@@ -33,7 +33,6 @@
 
   const glitchTargets = [
     'header',
-    'photo',
     'timeline',
     'abilities',
     'languages',

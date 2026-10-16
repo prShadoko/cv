@@ -156,15 +156,19 @@
   --color-border-button: var(--color-scale-2);
   --color-border-button-hover: var(--color-scale-3);
 
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: fixed;
+  top: var(--spacing);
+  right: var(--spacing);
 
   display: flex;
+  flex-direction: column;
+  align-items: end;
   gap: calc(.5 * var(--spacing));
 
   :global(.icon) {
     margin: calc(.5 * var(--spacing));
+    width: 1.6em;
+    height: 1.6em;
   }
 
   button {
@@ -172,6 +176,7 @@
     align-items: center;
 
     padding: 0;
+    width: fit-content;
 
     border: none;
     background-color: inherit;

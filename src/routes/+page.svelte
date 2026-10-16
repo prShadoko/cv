@@ -7,7 +7,7 @@
   import Readme from '../Readme.svelte';
   import Timeline from '../Timeline.svelte';
   import { onMount } from 'svelte';
-  import { Bug, BugOff, Printer } from '@lucide/svelte';
+  import { Bug, BugOff, Printer, X } from '@lucide/svelte';
 
   const { data } = $props();
   let isGlitching = $state(true);
@@ -114,9 +114,12 @@
     <Hobbies hobbies={data.hobbies}></Hobbies>
     <Contact contact={data.contact}></Contact>
     <div id="terminal" class="font-light border">
-    {#each terminal as t}
-    <div>{@html t}</div>
-    {/each}
+      <div class="head border">terminal<X class="icon" strokeWidth={3.5} /></div>
+      <div class="body">
+        {#each terminal as t}
+        <div>{@html t}</div>
+        {/each}
+      </div>
     </div>
   </div>
   <Readme readme={data.readme}></Readme>
@@ -240,7 +243,6 @@
         aspect-ratio: 1 / 1;
         height: 9rem;
         clip-path: circle(50%);
-        background-color: pink;
       }
     }
   }
@@ -252,19 +254,22 @@
   }
 
   #terminal {
-    --color-background-terminal: var(--color-medium-light);
-    --color-font-terminal: var(--color-medium-dark);
-
     flex-grow: 1;
-    padding: calc(.5 * var(--spacing));
-    background-color: var(--color-background-terminal);
-    color: var(--color-font-terminal);
-    font-size: .75rem;
 
-    & > div {
-      white-space: pre-wrap;
-      &::before {
-        content: '$> ';
+    & > .head > :global(.icon) {
+      height: 1em;
+      width: 1em;
+      color: var(--color-medium);
+    }
+    
+    & > .body {
+      padding: calc(.5 * var(--spacing));
+      font-size: .75rem;
+      div {
+        white-space: pre-wrap;
+        &::before {
+          content: '$> ';
+        }
       }
     }
   }
@@ -339,6 +344,7 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .num {
     color: var(--color-medium);
@@ -379,30 +385,6 @@
 
   .main {
     margin: 0;
-  }
-
-  /* Use borders instead of backgrounds for print (it may ignore backgrounds if t) */
-  .main #terminal {
-    --color-background-terminal: var(--color-light);
-    --color-font-terminal: var(--color-dark);
-
-    position: relative;
-    background: none;
-    overflow: hidden;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 0;
-
-      border-top: 300px solid var(--color-background-terminal);
-      z-index: -1;
-      
-      content: '';
-    }
   }
 
   :global .glitch {

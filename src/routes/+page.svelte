@@ -266,6 +266,7 @@
       position: relative;
       
       img {
+        display: block;
         aspect-ratio: 1 / 1;
         height: 9rem;
         clip-path: circle(50%);

@@ -47,7 +47,7 @@
   }
 
   .sep {
-    color: var(--color-medium);
+    color: var(--color-scale-3);
   }
 
   #timeline {
@@ -76,12 +76,12 @@
     /* padding-right: 0; */
 
     .duration {
-      color: var(--color-medium);
+      color: var(--color-scale-3);
     }
 
     .period > span {
       display: inline-block;
-      color: var(--color-medium);
+      color: var(--color-scale-3);
     }
   }
 

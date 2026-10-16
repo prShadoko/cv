@@ -41,7 +41,7 @@
     flex-direction: column;
     gap: calc(.5 * var(--spacing)) var(--spacing);
 
-    :global .icon {
+    :global(.icon) {
       width: 1em;
       height: 1em;
       margin-right: calc(var(--spacing) / 2);
@@ -50,11 +50,6 @@
       display: inline-block;
       vertical-align: -0.125em;
       line-height: 0;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
   }
 </style>

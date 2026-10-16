@@ -46,7 +46,7 @@
       right: 0;
       padding: var(--spacing);
       content: '[EOF]';
-      color: var(--color-medium-light);
+      color: var(--color-scale-3);
       font-size: .8em;
     }
   }

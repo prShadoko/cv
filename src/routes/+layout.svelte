@@ -9,22 +9,49 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<meta name="color-scheme" content="light dark" />
+	<script>
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  	document.documentElement.dataset['theme'] = savedTheme ?? (prefersDark ? 'dark' : 'light');
+	</script>
 </svelte:head>
 
 {@render children()}
 
 <style>
+	:global :root {
+		color-scheme: light dark;
+		
+		--color-scale-5: #291c1c;
+		--color-scale-4: #5d524d;
+		--color-scale-3: #9e9089;
+		--color-scale-2: #c0b7b2;
+		--color-scale-1: #f0ece5;
+
+		* {
+			transition-property: color, background-color, border-color, outline-color, text-decoration-color;
+			transition-duration: .5s;
+			transition-timing-function: ease;
+		}
+	}
+
+	@media screen {
+		:global :root[data-theme="dark"] {
+			--color-scale-5: #f0ece5;
+			--color-scale-4: #c0b7b2;
+			--color-scale-3: #9e9089;
+			--color-scale-2: #5d524d;
+			--color-scale-1: #291c1c;
+		}
+	}
+
   :global(body) {
     --spacing: 16px;
-		
-		--color-dark: #291c1c;
-		--color-medium-dark: #5d524d;
-		--color-medium: #9e9089;
-		--color-medium-light: #c0b7b2;
-		--color-light: #f0ece5;
 
-		--color-background: var(--color-light);
-		--color-border: var(--color-medium-light);
+		--color-background: var(--color-scale-1);
+		--color-border: var(--color-scale-2);
+		--color-text: var(--color-scale-5);
 
 		--font-heavy: 'Urbanist Variable', sans-serif;
 		--font-regular: 'Quicksand Variable', sans-serif;
@@ -38,7 +65,7 @@
 		position: relative;
 		margin: var(--spacing);
 
-    color: var(--color-dark);
+    color: var(--color-text);
 		background-color: var(--color-background);
   }
 

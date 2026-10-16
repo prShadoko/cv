@@ -7,11 +7,12 @@
   import Readme from '../Readme.svelte';
   import Timeline from '../Timeline.svelte';
   import { onMount } from 'svelte';
-  import { Bug, BugOff, Printer, X } from '@lucide/svelte';
+  import { Bug, BugOff, Moon, Printer, Sun, X } from '@lucide/svelte';
 
   const { data } = $props();
+  let isDarkTheme = $state(undefined);
   let isGlitching = $state(true);
-  let glitchButton, printButton;
+  let themeButton, glitchButton, printButton;
 
   const terminal = [
     `ps -C 'candidate_search'<br />  PID TTY         TIME CMD<br /> 1337 tty1    00:00:00 candidate_search`,
@@ -19,6 +20,16 @@
     `sudo hire \\<br />--name='thomas richard'\\<br />--job='dev backend'<br />Password:█`,
   ];
   const footerMessage = '========WW91IGFjdHVhbGx5IHRvb2sgdGhlIHRpbWUgdG8gZGVjb2RlIHRoaXM/IEkgbXVzdCBoYXZlIGNhdWdodCB5b3VyIGV5ZSwgdGhlbi4gV2VsbCwgeW91IGtub3cgd2hhdCB0byBkbyBuZXh04oCm========';
+
+  const toggleTheme = () => {
+    isDarkTheme = !isDarkTheme;
+  };
+  $effect(() => {
+    if (isDarkTheme != undefined) {
+      document.documentElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
+      localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+    }
+  });
 
   const glitchTargets = [
     'header',
@@ -66,6 +77,9 @@
   const toggleGlitch = () => isGlitching = !isGlitching;
 
   onMount(() => {
+    isDarkTheme = document.documentElement.dataset['theme'] === 'dark';
+    themeButton.addEventListener('click', toggleTheme);
+
     glitchButton.addEventListener('click', () => {
       toggleGlitch();
       glitch();
@@ -83,6 +97,9 @@
 </script>
 
 <div id="buttons">
+  <button id="theme-button" style={`--button-tooltip: '${isDarkTheme ? 'Dark theme' : 'Light theme'}';`} bind:this={themeButton}>
+    {#if isDarkTheme}<Moon class="icon" />{:else}<Sun class="icon" />{/if}
+  </button>
   <button id="glitch-button" style={`--button-tooltip: '${isGlitching ? 'Disable glitch' : 'Enable glitch'}';`} bind:this={glitchButton}>
     {#if isGlitching}<Bug class="icon" />{:else}<BugOff class="icon" />{/if}
   </button>
@@ -100,10 +117,10 @@
       <h2>Thomas RICHARD</h2>
     </div>
     <div id="photo">
-      <Mark position="top-left" direction="bottom-right" color="var(--color-medium-light)" />
-      <Mark position="top-right" direction="bottom-left" color="var(--color-medium-light)" />
-      <Mark position="bottom-left" direction="top-right" color="var(--color-medium-light)" />
-      <Mark position="bottom-right" direction="top-left" color="var(--color-medium-light)" />
+      <Mark position="top-left" direction="bottom-right" color="var(--color-scale-2)" />
+      <Mark position="top-right" direction="bottom-left" color="var(--color-scale-2)" />
+      <Mark position="bottom-left" direction="top-right" color="var(--color-scale-2)" />
+      <Mark position="bottom-right" direction="top-left" color="var(--color-scale-2)" />
       <img src="octopus.jpg" alt="my face (almost)" />
     </div>
   </div>
@@ -133,8 +150,8 @@
 
 <style>
 #buttons {
-  --color-border-button: var(--color-medium-light);
-  --color-border-button-hover: var(--color-medium);
+  --color-border-button: var(--color-scale-2);
+  --color-border-button-hover: var(--color-scale-3);
 
   position: absolute;
   top: 0;
@@ -159,6 +176,7 @@
     border-radius: 4px;
     box-shadow: 0px 2px 1px var(--color-border-button);
     cursor: pointer;
+    color: var(--color-text);
     
     overflow: hidden;
     
@@ -259,7 +277,7 @@
     & > .head > :global(.icon) {
       height: 1em;
       width: 1em;
-      color: var(--color-medium);
+      color: var(--color-scale-3);
     }
     
     & > .body {
@@ -283,7 +301,7 @@
   #footer {
     padding: calc(.5 * var(--spacing)) var(--spacing);
     font-size: .75em;
-    color: var(--color-medium);
+    color: var(--color-scale-3);
     text-align: center;
   }
 }
@@ -347,8 +365,14 @@
   align-items: center;
 
   .num {
-    color: var(--color-medium);
+    color: var(--color-scale-3);
   }
+}
+
+:global(a) {
+  /* inherit caused a delay on the color transition */
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 :global .button {
@@ -361,7 +385,7 @@
   &::after {
     content: '';
     position: absolute;
-    border: 1px solid var(--color-medium);
+    border: 1px solid var(--color-scale-3);
     width: 4px;
     top: -1px;
     bottom: -1px;

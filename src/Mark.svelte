@@ -8,7 +8,7 @@
     class?: string;
   }
   
-  const { direction = 'all', position, color = 'var(--color-dark)', arm = 5, thickness = 1, class: cssClass = '' }: Props = $props();
+  const { direction = 'all', position, color = 'var(--color-scale-5)', arm = 5, thickness = 1, class: cssClass = '' }: Props = $props();
 
   const classes = $derived([
     ...(Array.isArray(cssClass) ? cssClass : cssClass.split(' ')),

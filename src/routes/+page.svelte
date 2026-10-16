@@ -372,6 +372,8 @@
   justify-content: space-between;
   align-items: center;
 
+  font-weight: 600;
+
   .num {
     color: var(--color-scale-3);
   }

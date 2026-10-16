@@ -287,38 +287,26 @@
 
 :global .glitch {
   animation: var(--glitch-duration) step-end 0s 1 glitch-color, var(--glitch-duration) step-end 0s 1 glitch-deform;
-  
-  .glitchable,
-  .glitchable-before::before,
-  .glitchable-before::after {
-    animation: .75s step-end 0s 1 glitch-color;
-  }
 }
 
 @keyframes glitch-color {
   0% {
-    box-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
-    text-shadow: 6px 2px magenta, -3px -4px cyan, -8px 5px yellow;
+    filter: drop-shadow(6px 2px magenta) drop-shadow(-3px -4px cyan) drop-shadow(-8px 5px yellow);
   }
   10% {
-    box-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
-    text-shadow: -2px 4px magenta, -6px -6px cyan, 0px 2px yellow;
+    filter: drop-shadow(-2px 4px magenta) drop-shadow(-6px -6px cyan) drop-shadow(0px 2px yellow);
   }
   26% {
-    box-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
-    text-shadow: 6px 3px magenta, -3px -4px cyan, 2px -5px yellow;
+    filter: drop-shadow(6px 3px magenta) drop-shadow(-3px -4px cyan) drop-shadow(2px -5px yellow);
   }
   40% {
-    box-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
-    text-shadow: 3px -1px magenta, -2px -6px cyan, 0px 2px yellow;
+    filter: drop-shadow(3px -1px magenta) drop-shadow(-2px -6px cyan) drop-shadow(0px 2px yellow);
   }
   60% {
-    box-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
-    text-shadow: -2px -4px magenta, 0px 6px cyan, 6px 3px yellow;
+    filter: drop-shadow(-2px -4px magenta) drop-shadow(0px 6px cyan) drop-shadow(6px 3px yellow);
   }
   80% {
-    box-shadow: none;
-    text-shadow: none;
+    filter: none;
   }
 }
 
@@ -419,12 +407,6 @@
 
   :global .glitch {
     animation: none;
-
-    .glitchable,
-    .glitchable-before::before,
-    .glitchable-before::after {
-      animation: none;
-    }
   }
 }
 </style>

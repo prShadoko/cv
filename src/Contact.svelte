@@ -14,13 +14,13 @@
   <div class="head border font-light">contact.vcf<span class="num">04</span></div>
   <div class="body border">
     <div>
-      <a href="tel:{contact.phone}" class="button glitchable-before glitchable-after"><Phone class="icon" />{contact.phone}</a>
+      <a href="tel:{contact.phone}" class="button"><Phone class="icon" />{contact.phone}</a>
     </div>
     <div>
-      <a href="mailto:{contact.email}" class="button glitchable-before glitchable-after"><Mail class="icon" />{contact.email}</a>
+      <a href="mailto:{contact.email}" class="button"><Mail class="icon" />{contact.email}</a>
     </div>
     <div>
-      <a href={contact.addressMap} target="_blank" class="button glitchable-before glitchable-after"><MapPin class="icon" />{@html contact.address}</a>
+      <a href={contact.addressMap} target="_blank" class="button"><MapPin class="icon" />{@html contact.address}</a>
     </div>
   </div>
 </div>

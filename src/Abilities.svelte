@@ -5,8 +5,8 @@
 </script>
 
 <div id="abilities">
-  <Mark position="top-left" direction="bottom" class="glitchable" />
-  <Mark position="top-right" direction="left" class="glitchable" />
+  <Mark position="top-left" direction="bottom" />
+  <Mark position="top-right" direction="left" />
 
   <div class="head border font-light">compétences.log<span class="num">01</span></div>
   <div class="body border">
@@ -15,14 +15,14 @@
       <div class="label font-heavy">{category}</div>
       {#each abilities as { ability, level }}
       <div class="ability">
-        <Mark position="top-left" direction="bottom-right" arm={3} color="var(--color-medium-light)" class="glitchable" />
-        <Mark position="top-right" direction="bottom-left" arm={3} color="var(--color-medium-light)" class="glitchable" />
-        <Mark position="bottom-left" direction="top-right" arm={3} color="var(--color-medium-light)" class="glitchable" />
-        <Mark position="bottom-right" direction="top-left" arm={3} color="var(--color-medium-light)" class="glitchable" />
+        <Mark position="top-left" direction="bottom-right" arm={3} color="var(--color-scale-2)" />
+        <Mark position="top-right" direction="bottom-left" arm={3} color="var(--color-scale-2)" />
+        <Mark position="bottom-left" direction="top-right" arm={3} color="var(--color-scale-2)" />
+        <Mark position="bottom-right" direction="top-left" arm={3} color="var(--color-scale-2)" />
         <div class="label">{ability}</div>
         <div class={['level', `level-${level}`]}>
           {#each { length: 5 }}
-          <div class="step glitchable"></div>
+          <div class="step"></div>
           {/each}
         </div>
       </div>

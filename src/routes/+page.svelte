@@ -400,6 +400,8 @@
     width: 4px;
     top: -1px;
     bottom: -1px;
+
+    transition: all .2s ease;
   }
   
   &::before {
@@ -410,6 +412,15 @@
   &::after {
     border-left: none;
     right: -1px;
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      width: calc(1px + 50%);
+      top: -4px;
+      bottom: -4px;
+    }
   }
 }
 	

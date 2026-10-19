@@ -1,4 +1,4 @@
-import { abilities, experiences, languages, hobbies, contact, readme } from './data';
+import { abilities, experiences, languages, hobbies, contact, metadata, readme } from './data';
 
 interface GroupedAbilities {
   category: string;
@@ -29,6 +29,7 @@ export function load() {
     languages,
     hobbies,
     contact,
+    metadata,
     readme,
 	};
 }

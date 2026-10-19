@@ -4,6 +4,7 @@
   import Hobbies from '../Hobbies.svelte';
   import Languages from '../Languages.svelte';
   import Mark from '../Mark.svelte';
+  import Metadata from '../Metadata.svelte';
   import Readme from '../Readme.svelte';
   import Timeline from '../Timeline.svelte';
   import { onMount } from 'svelte';
@@ -15,9 +16,8 @@
   let themeButton, glitchButton, printButton;
 
   const terminal = [
-    `ps -C 'candidate_search'<br />  PID TTY         TIME CMD<br /> 1337 tty1    00:00:00 candidate_search`,
-    `kill 1337`,
-    `sudo hire \\<br />--name='thomas richard'\\<br />--job='dev backend'<br />Password:█`,
+    `pkill candidate_search`,
+    `sudo hire \\<br />   --name='thomas richard' \\<br />   --job='dev backend'<br />Password:█`,
   ];
   const footerMessage = '========WW91IGFjdHVhbGx5IHRvb2sgdGhlIHRpbWUgdG8gZGVjb2RlIHRoaXM/IEkgbXVzdCBoYXZlIGNhdWdodCB5b3VyIGV5ZSwgdGhlbi4gV2VsbCwgeW91IGtub3cgd2hhdCB0byBkbyBuZXh04oCm========';
 
@@ -133,6 +133,7 @@
     <Languages languages={data.languages}></Languages>
     <Hobbies hobbies={data.hobbies}></Hobbies>
     <Contact contact={data.contact}></Contact>
+    <Metadata metadata={data.metadata}></Metadata>
     <div id="terminal" class="font-light border">
       <div class="head border">terminal<X class="icon" strokeWidth={3.5} /></div>
       <div class="body">

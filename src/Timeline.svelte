@@ -52,13 +52,12 @@
 
   #timeline {
     position: relative;
-    
+
     display: inline-grid;
     grid-template-columns: auto auto;
     /* gap: calc(.5 * var(--spacing)); */
     gap: var(--spacing) 0;
     width: fit-content;
-    height: fit-content;
     padding: var(--spacing);
   }
 

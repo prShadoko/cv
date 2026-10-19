@@ -10,7 +10,7 @@
   <Mark position="bottom-left" direction="right" />
   <Mark position="bottom-right" direction="left" />
 
-  <div class="head border font-light">readme.txt<span class="num">05</span></div>
+  <div class="head border font-light">readme.txt<span class="num">06</span></div>
   <div class="body border">
     {#each readme as readmeBlock}
     <div>{readmeBlock}</div>

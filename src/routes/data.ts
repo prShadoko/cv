@@ -135,7 +135,7 @@ export const abilities: Ability[] = [
   {
     ability: 'SvelteKit',
     category: 'frameworks' as const,
-    level: 4,
+    level: 3,
   },
   {
     ability: 'React',
@@ -217,6 +217,6 @@ export const metadata: Metadata = {
 export const readme: string[] = [
   `J'ai 36 ans. Je suis curieux, méthodique, exigeant quant à la qualité du code et je n'hésite pas à poser des questions en cas de doute.`,
   `J'ai fait ma première expérience de la programmation vers mes 9 ans via l'interpreteur BASIC d'un ordinateur VTech pour enfants. J'ai passé les années qui ont suivi à écumer la bibliothèque et le Site du Zéro pour apprendre le C et les langages du Web 1.0. En Terminale, la majeure partie de mes cours de philo aura servi à ce que je code des jeux sur ma TI-89 pour mes camarades.`,
-  `Je me déplace essentiellement à vélo, et sur mon temps libre j'organise des journées jeux de société, je cours, je grimpe, je saute d'un projet craft/DIY/bricolage à l'autre et je suis l'heureux beau-père (et portier) de deux chats. Et je fais des jeux de mots nuls.`,
+  `Je me déplace essentiellement à vélo, et sur mon temps libre j'organise des journées jeux de société, je cours, je grimpe, je saute d'un projet craft/DIY/bricolage à l'autre. Je suis l'heureux beau-père (et portier) de deux chats et je fais des jeux de mots nuls.`,
   `Je cherche actuellement un CDI en tant que développeur full-stack ou backend sur Lyon, dans l'idéal à portée de pédalier.`,
 ];

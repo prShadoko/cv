@@ -210,8 +210,8 @@ interface Metadata {
 }
 
 export const metadata: Metadata = {
-  source: 'github.com/prShadoko/cv',
-  web: 'thori.fr/cv',
+  source: 'https://github.com/prShadoko/cv',
+  web: 'https://prShadoko.github.io/cv',
 };
 
 export const readme: string[] = [

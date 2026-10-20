@@ -42,7 +42,7 @@
   --half-neg: calc(-1 * var(--half));
 
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: var(--dimension);
   height: var(--dimension);
 

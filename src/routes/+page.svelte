@@ -160,7 +160,7 @@
   position: fixed;
   top: var(--spacing);
   right: var(--spacing);
-
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -180,7 +180,7 @@
     width: fit-content;
 
     border: none;
-    background-color: inherit;
+    background-color: var(--color-background);
     border: 1px solid var(--color-border-button);
     border-radius: 4px;
     box-shadow: 0px 2px 1px var(--color-border-button);

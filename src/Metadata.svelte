@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
   const { metadata } = $props();
 
   import { Globe, CodeXml } from '@lucide/svelte';
   import Mark from './Mark.svelte';
+
+  const shortenUrl = (url: string) => url.replace(/^(https?:\/\/)/, '');
 </script>
 
 <div id="metadata">
@@ -14,10 +16,10 @@
   <div class="head border font-light">.metadata<span class="num">05</span></div>
   <div class="body border">
     <div>
-      <a href="{metadata.web}" class="button"><Globe class="icon" />{metadata.web}</a>
+      <a href="{metadata.web}" class="button"><Globe class="icon" />{shortenUrl(metadata.web)}</a>
     </div>
     <div>
-      <a href="{metadata.source}" class="button"><CodeXml class="icon" />{metadata.source}</a>
+      <a href="{metadata.source}" class="button"><CodeXml class="icon" />{shortenUrl(metadata.source)}</a>
     </div>
   </div>
 </div>

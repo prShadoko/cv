@@ -32,6 +32,10 @@
   });
 
   const glitchTargets = [
+    'glitch-button',
+    'glitch-button',
+    'glitch-button',
+    'glitch-button',
     'header',
     'timeline',
     'abilities',
@@ -43,7 +47,7 @@
     'footer',
   ];
 
-  const glitchDuration = 750; // ms
+  const glitchDuration = 500; // ms
   const glitchDelay = { min: 500, max: 4000 }; // ms
   const glitch = () => {
     if (!isGlitching) {
@@ -99,58 +103,59 @@
   });
 </script>
 
-<div id="buttons">
-  <button id="theme-button" style={`--button-tooltip: '${isDarkTheme ? 'Dark theme' : 'Light theme'}';`} bind:this={themeButton}>
-    {#if isDarkTheme}<Moon class="icon" />{:else}<Sun class="icon" />{/if}
-  </button>
-  <button id="glitch-button" style={`--button-tooltip: '${isGlitching ? 'Disable glitch' : 'Enable glitch'}';`} bind:this={glitchButton}>
-    {#if isGlitching}<Bug class="icon" />{:else}<BugOff class="icon" />{/if}
-  </button>
-  <button id="print-button" style={`--button-tooltip: 'Print';`} bind:this={printButton}>
-    <Printer class="icon" />
-  </button>
-</div>
-
-<div class="main" style="--glitch-duration: {`${glitchDuration / 1000}s`};">
-  <div id="header" class="border font-heavy">
-    <Mark position="top-left" direction="bottom-right" />
-    <Mark position="top-right" direction="bottom-left" />
-    <div id="titles">
-      <h1>Développeur Full-Stack</h1>
-      <h2>Thomas RICHARD</h2>
-    </div>
-    <div id="photo">
-      <Mark position="top-left" direction="bottom-right" color="var(--color-scale-2)" />
-      <Mark position="top-right" direction="bottom-left" color="var(--color-scale-2)" />
-      <Mark position="bottom-left" direction="top-right" color="var(--color-scale-2)" />
-      <Mark position="bottom-right" direction="top-left" color="var(--color-scale-2)" />
-      <img src="octopus.jpg" alt="my face (almost)" />
-    </div>
+<div style="display: contents; --glitch-duration: {`${glitchDuration / 1000}s`};">
+  <div id="buttons">
+    <button id="theme-button" style={`--button-tooltip: '${isDarkTheme ? 'Dark theme' : 'Light theme'}';`} bind:this={themeButton}>
+      {#if isDarkTheme}<Moon class="icon" />{:else}<Sun class="icon" />{/if}
+    </button>
+    <button id="glitch-button" style={`--button-tooltip: '${isGlitching ? 'Disable glitch' : 'Enable glitch'}';`} bind:this={glitchButton}>
+      {#if isGlitching}<Bug class="icon" />{:else}<BugOff class="icon" />{/if}
+    </button>
+    <button id="print-button" style={`--button-tooltip: 'Print';`} bind:this={printButton}>
+      <Printer class="icon" />
+    </button>
   </div>
-  <Timeline experiences={data.experiences}></Timeline>
-  <div id="aside">
-    <Abilities abilities={data.abilities}></Abilities>
-    <Languages languages={data.languages}></Languages>
-    <Hobbies hobbies={data.hobbies}></Hobbies>
-    <Contact contact={data.contact}></Contact>
-    <Metadata metadata={data.metadata}></Metadata>
-    <div id="terminal" class="font-light border">
-      <div class="head border">terminal<X class="icon" strokeWidth={3.5} /></div>
-      <div class="body">
-        {#each terminal as t}
-        <div>{@html t}</div>
-        {/each}
+
+  <div class="main">
+    <div id="header" class="border font-heavy">
+      <Mark position="top-left" direction="bottom-right" />
+      <Mark position="top-right" direction="bottom-left" />
+      <div id="titles">
+        <h1>Développeur Full-Stack</h1>
+        <h2>Thomas RICHARD</h2>
+      </div>
+      <div id="photo">
+        <Mark position="top-left" direction="bottom-right" color="var(--color-scale-2)" />
+        <Mark position="top-right" direction="bottom-left" color="var(--color-scale-2)" />
+        <Mark position="bottom-left" direction="top-right" color="var(--color-scale-2)" />
+        <Mark position="bottom-right" direction="top-left" color="var(--color-scale-2)" />
+        <img src="octopus.jpg" alt="my face (almost)" />
       </div>
     </div>
-  </div>
-  <Readme readme={data.readme}></Readme>
-  <div id="footer" class="border font-light">
-    <Mark position="bottom-left" direction="top-right" />
-    <Mark position="bottom-right" direction="top-left" />
-    {footerMessage}
+    <Timeline experiences={data.experiences}></Timeline>
+    <div id="aside">
+      <Abilities abilities={data.abilities}></Abilities>
+      <Languages languages={data.languages}></Languages>
+      <Hobbies hobbies={data.hobbies}></Hobbies>
+      <Contact contact={data.contact}></Contact>
+      <Metadata metadata={data.metadata}></Metadata>
+      <div id="terminal" class="font-light border">
+        <div class="head border">terminal<X class="icon" strokeWidth={3.5} /></div>
+        <div class="body">
+          {#each terminal as t}
+          <div>{@html t}</div>
+          {/each}
+        </div>
+      </div>
+    </div>
+    <Readme readme={data.readme}></Readme>
+    <div id="footer" class="border font-light">
+      <Mark position="bottom-left" direction="top-right" />
+      <Mark position="bottom-right" direction="top-left" />
+      {footerMessage}
+    </div>
   </div>
 </div>
-
 
 <style>
 #buttons {

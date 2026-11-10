@@ -276,6 +276,7 @@
         aspect-ratio: 1 / 1;
         height: 9rem;
         clip-path: circle(50%);
+        filter: sepia(.4);
       }
     }
   }
@@ -427,6 +428,12 @@
       top: -4px;
       bottom: -4px;
     }
+  }
+}
+
+@media screen {
+  :global :root[data-theme="dark"] .main #header #photo img {
+    filter: sepia(.4) brightness(.8);
   }
 }
 	

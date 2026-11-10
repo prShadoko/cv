@@ -11,9 +11,11 @@
   import { Bug, BugOff, Moon, Printer, Sun, X } from '@lucide/svelte';
 
   const { data } = $props();
-  let isDarkTheme = $state(undefined);
-  let isGlitching = $state(undefined);
-  let themeButton, glitchButton, printButton;
+  let isDarkTheme = $state<boolean | undefined>(undefined);
+  let isGlitching = $state<boolean | undefined>(undefined);
+  let themeButton: HTMLButtonElement;
+  let glitchButton: HTMLButtonElement;
+  let printButton: HTMLButtonElement;
 
   const terminal = [
     `pkill candidate_search`,
@@ -32,6 +34,7 @@
   });
 
   const glitchTargets = [
+    // increase chances of glitch-button to be selected
     'glitch-button',
     'glitch-button',
     'glitch-button',
@@ -64,11 +67,11 @@
         }
         const id = glitchTargets[Math.floor(Math.random() * glitchTargets.length)];
         const elt = document.getElementById(id);
-        elt.classList.add('glitch');
+        elt?.classList.add('glitch');
 
         setTimeout(
           () => {
-            elt.classList.remove('glitch');
+            elt?.classList.remove('glitch');
             glitch();
           },
           glitchDuration
@@ -79,14 +82,14 @@
   }
   const toggleGlitch = () => {
     isGlitching = !isGlitching;
-    localStorage.setItem('glitch', isGlitching);
+    localStorage.setItem('glitch', isGlitching ? 'true' : 'false');
   };
 
   onMount(() => {
     isDarkTheme = document.documentElement.dataset['theme'] === 'dark';
     themeButton.addEventListener('click', toggleTheme);
 
-    isGlitching = localStorage.getItem('glitch') === 'true' ?? true;
+    isGlitching = localStorage.getItem('glitch') === 'true';
     glitchButton.addEventListener('click', () => {
       toggleGlitch();
       glitch();
@@ -276,6 +279,7 @@
         aspect-ratio: 1 / 1;
         height: 9rem;
         clip-path: circle(50%);
+        filter: sepia(.4);
       }
     }
   }
@@ -427,6 +431,12 @@
       top: -4px;
       bottom: -4px;
     }
+  }
+}
+
+@media screen {
+  :global :root[data-theme="dark"] .main #header #photo img {
+    filter: sepia(.4) brightness(.8);
   }
 }
 	

@@ -20,7 +20,7 @@
         <Mark position="bottom-left" direction="top-right" arm={3} color="var(--color-scale-2)" />
         <Mark position="bottom-right" direction="top-left" arm={3} color="var(--color-scale-2)" />
         <div class="label">{ability}</div>
-        <div class={['level', `level-${level}`]}>
+        <div class={['level', `level-${level}`]} aria-label={`${level} / 5`}>
           {#each { length: 5 }}
           <div class="step"></div>
           {/each}

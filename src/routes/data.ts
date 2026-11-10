@@ -177,7 +177,7 @@ interface Language {
 export const languages: Language[] = [
   {
     lang: 'anglais',
-    level: 'B2',
+    level: 'C1',
     certificates: [{ name: 'TOEIC', year: 2016, score: '975/990' }],
   },
 ];

@@ -30,7 +30,8 @@
 		--color-scale-1: #f0ece5;
 
 		* {
-			transition-property: color, background-color, border-color, outline-color, text-decoration-color;
+			/* all colors and filter, which may also alter them */
+			transition-property: color, background-color, border-color, outline-color, text-decoration-color, filter;
 			transition-duration: .5s;
 			transition-timing-function: ease;
 		}

@@ -63,7 +63,7 @@ export const experiences: Experience[] = [
     duration: '6 mois',
   },
   {
-    branch: 'formation' as const,
+    branch: 'job' as const,
     title: 'Développeur Android',
     location: 'Apps Panel',
     missions: [`Création et maintien d'applications Android`],

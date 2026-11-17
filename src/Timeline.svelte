@@ -1,14 +1,51 @@
-<script>
-    import Mark from './Mark.svelte';
+<script lang="ts">
+  import Mark from './Mark.svelte';
+  import type { Experience } from './routes/data';
 
-  const { experiences } = $props();
+  const { experiences }: { experiences: Experience[] } = $props();
+  const jobs = $derived(experiences.filter(({ branch }) => branch === 'job'));
+  const education = $derived(experiences.filter(({ branch }) => branch === 'formation'));
 </script>
 
-<div id="timeline" class="border">
+<div id="timeline" class="body border">
   <Mark position="top-left" direction="right" />
   <Mark position="bottom-right" direction="top" />
 
-  {#each experiences as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
+  <div class="head border font-light">expériences.log<span class="num">01-A</span></div>
+  {#each jobs as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
+  <div class={['timestamp', branch, 'font-light']}>
+    {#if duration}
+    <div class="duration">{duration} /&nbsp;</div>
+    {/if}
+    <div class="period">{start}{end ? `-${end}` : ''}<span class="font-light">&nbsp;&gt;&gt;&gt;&gt;&nbsp;</span></div>
+  </div>
+  <div class={['content', branch]}>
+    <div class="title font-heavy">{@html title}</div>
+    {#if location}
+    <div class="location font-light">@&nbsp;{@html location}</div>
+    {/if}
+    {#if missions}
+    <!-- <div class="missions">{@html missions.map((m) => m.replace(' ', '&nbsp;')).join('&nbsp;/ ')}</div> -->
+    <div class="missions">
+      {#each missions as m, i}
+      <div>{@html m}</div>
+      {/each}
+    </div>
+    {/if}
+    {#if stack}
+    <div class="stack font-light">[ {@html stack.join(' | ')} ]</div>
+    {/if}
+  </div>
+  {/each}
+
+  <div class="head border font-light">
+    <Mark position="top-left" direction="right" />
+    <Mark position="top-right" direction="left" />
+    <span>études.log</span>
+    <span class="num">01-B</span>
+  </div>
+  
+  {#each education as { branch, start, end = undefined, duration = undefined, title, location = undefined, missions = undefined, stack = undefined }, i}
   <div class={['timestamp', branch, 'font-light']}>
     {#if duration}
     <div class="duration">{duration} /&nbsp;</div>
@@ -52,13 +89,16 @@
 
   #timeline {
     position: relative;
+    gap: 1px;
 
     display: inline-grid;
     grid-template-columns: auto auto;
-    /* gap: calc(.5 * var(--spacing)); */
     gap: var(--spacing) 0;
-    width: fit-content;
-    padding: var(--spacing);
+    padding-bottom: var(--spacing);
+
+    .head {
+      grid-column: 1 / 3;
+    }
   }
 
   .timestamp,
@@ -72,7 +112,7 @@
     justify-content: end;
     letter-spacing: -8%;
     font-size: .8rem;
-    /* padding-right: 0; */
+    padding-left: var(--spacing);
 
     .duration {
       color: var(--color-scale-3);
@@ -90,6 +130,7 @@
     flex-wrap: wrap;
     flex-grow: 1;
     justify-content: space-between;
+    padding-right: var(--spacing);
 
     & > :not(:last-child) {
       margin-bottom: 4px;

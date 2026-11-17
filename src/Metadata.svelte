@@ -13,7 +13,7 @@
   <Mark position="bottom-left" direction="right" />
   <Mark position="bottom-right" direction="left" />
 
-  <div class="head border font-light">.metadata<span class="num">05</span></div>
+  <div class="head border font-light">.metadata<span class="num">06</span></div>
   <div class="body border">
     <div>
       <a href="{metadata.web}" class="button"><Globe class="icon" />{shortenUrl(metadata.web)}</a>

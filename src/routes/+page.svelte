@@ -376,7 +376,9 @@
 }
 
 :global .head {
-  margin: -1px;
+  position: relative;
+
+  height: fit-content;
   padding: calc(.5 * var(--spacing)) var(--spacing);
 
   display: flex;

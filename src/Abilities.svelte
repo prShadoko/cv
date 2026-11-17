@@ -8,7 +8,7 @@
   <Mark position="top-left" direction="bottom" />
   <Mark position="top-right" direction="left" />
 
-  <div class="head border font-light">compétences.log<span class="num">01</span></div>
+  <div class="head border font-light">compétences.log<span class="num">02</span></div>
   <div class="body border">
     {#each abilitiesGroup as { category, abilities }}
     <div class="category">

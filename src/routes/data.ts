@@ -1,5 +1,5 @@
 export interface Experience {
-    branch: 'main' | 'formation' | 'job';
+    branch: 'formation' | 'job';
     title: string;
     location?: string;
     missions?: string[];
@@ -11,11 +11,6 @@ export interface Experience {
 }
 
 export const experiences: Experience[] = [
-  {
-    branch: 'main' as const,
-    title: 'Initialisation du processus',
-    start: '1990',
-  },
   {
     branch: 'formation' as const,
     title: 'Classes preparatoires - PTSI / PT',
